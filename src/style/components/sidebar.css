@@ -1,0 +1,50 @@
+/* ---------------- SIDEBAR ---------------- */
+.left .sidebar {
+  margin-top: 1rem;
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+}
+
+.left .sidebar .menu-item {
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  cursor: pointer;
+  translate: all 300ms ease;
+  position: relative;
+}
+
+.left .sidebar .menu-item:hover {
+  background: var(--color-light);
+}
+
+.left .sidebar .sidebar-icons {
+  font-size: 1.4rem;
+  color: var(--color-gray);
+  margin-left: 2rem;
+  position: relative;
+}
+
+.left .sidebar .sidebar-options {
+  margin-left: 1.5rem;
+  font-size: 1rem;
+}
+
+.left .sidebar .active {
+  background: var(--color-light);
+}
+
+.left .sidebar .active .sidebar-icons,
+.left .sidebar .active .sidebar-options {
+  color: var(--color-primary);
+}
+
+.left .sidebar .active::before {
+  content: '';
+  display: block;
+  width: 0.5rem;
+  height: 100%;
+  position: absolute;
+  background: var(--color-primary);
+}
