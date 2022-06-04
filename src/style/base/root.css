@@ -4,15 +4,15 @@
 /* CSS VARIABLES  */
 :root,
 :root .light {
-  --color-white: hsl(252, 30%, 100%);
-  --color-light: hsl(252, 30%, 95%);
-  --color-gray: hsl(252, 15%, 65%);
-  --color-primary: hsl(252, 75%, 60%);
-  --color-secondary: hsl(252, 100%, 90%);
-  --color-success: hsl(120, 95%, 65%);
-  --color-danger: hsl(0, 95%, 65%);
-  --color-dark: hsl(252, 30%, 17%);
-  --color-black: hsl(252, 30%, 10%);
+  --color-white: hsl(252, 30%, 100%) !important;
+  --color-light: hsl(252, 30%, 95%) !important;
+  --color-gray: hsl(252, 15%, 65%) !important;
+  --color-primary: hsl(252, 75%, 60%) !important;
+  --color-secondary: hsl(252, 100%, 90%) !important;
+  --color-success: hsl(120, 95%, 65%) !important;
+  --color-danger: hsl(0, 95%, 65%) !important;
+  --color-dark: hsl(252, 30%, 17%) !important;
+  --color-black: hsl(252, 30%, 10%) !important;
 
   --border-radius: 2rem;
   --card-border-radius: 1rem;
@@ -25,15 +25,15 @@
 }
 
 :root .dark {
-  --color-white: hsl(252, 30%, 17%);
-  --color-light: hsl(252, 30%, 5%);
-  --color-gray: hsl(252, 15%, 65%);
-  --color-primary: hsl(252, 75%, 60%);
-  --color-secondary: hsl(252, 100%, 90%);
-  --color-success: hsl(120, 95%, 65%);
-  --color-danger: hsl(0, 95%, 65%);
-  --color-dark: hsl(252, 30%, 100%);
-  --color-black: hsl(252, 30%, 95%);
+  --color-white: hsl(252, 30%, 17%) !important;
+  --color-light: hsl(252, 30%, 5%) !important;
+  --color-gray: hsl(252, 15%, 65%) !important;
+  --color-primary: hsl(252, 75%, 60%) !important;
+  --color-secondary: hsl(252, 100%, 90%) !important;
+  --color-success: hsl(120, 95%, 65%) !important;
+  --color-danger: hsl(0, 95%, 65%) !important;
+  --color-dark: hsl(252, 30%, 100%) !important;
+  --color-black: hsl(252, 30%, 95%) !important;
 
   --border-radius: 2rem;
   --card-border-radius: 1rem;
@@ -57,6 +57,30 @@
     --color-danger: hsl(0, 95%, 65%);
     --color-dark: hsl(252, 30%, 100%);
     --color-black: hsl(252, 30%, 95%);
+
+    --border-radius: 2rem;
+    --card-border-radius: 1rem;
+    --btn-padding: 0.6rem 2rem;
+    --search-padding: 0.6rem 1rem;
+    --card-padding: 1rem;
+
+    --sticky-top-left: 5.4rem;
+    --sticky-top-right: -18rem;
+  }
+}
+
+/* LIGHT THEME CSS VARIABLES  */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-white: hsl(252, 30%, 100%);
+    --color-light: hsl(252, 30%, 95%);
+    --color-gray: hsl(252, 15%, 65%);
+    --color-primary: hsl(252, 75%, 60%);
+    --color-secondary: hsl(252, 100%, 90%);
+    --color-success: hsl(120, 95%, 65%);
+    --color-danger: hsl(0, 95%, 65%);
+    --color-dark: hsl(252, 30%, 17%);
+    --color-black: hsl(252, 30%, 10%);
 
     --border-radius: 2rem;
     --card-border-radius: 1rem;

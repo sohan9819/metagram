@@ -1,6 +1,6 @@
 .profile-card {
   background-color: var(--color-white);
-  border-radius: var(--border-radius);
+  border-radius: var(--card-border-radius);
   padding: 0.6rem 1rem;
   margin: 1rem 0rem;
 }

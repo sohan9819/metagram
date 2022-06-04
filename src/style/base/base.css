@@ -77,6 +77,14 @@ h6 {
 }
 
 /* General Styles */
+.light {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
 .container {
   width: 80%;
   margin: 0 auto;
