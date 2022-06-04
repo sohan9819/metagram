@@ -78,7 +78,7 @@ export const Post = () => {
         </p>
       </div>
       <div className='text-muted'>View all 277 comments</div>
-      <div className='comments hide'>
+      <div className='comments hide '>
         <div className='comment'>
           <div className='profile-photo'>
             <img src={profile_1} alt='profile picture' />

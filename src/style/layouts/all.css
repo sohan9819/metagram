@@ -1,2 +1,5 @@
-@import './landing.css';
-@import './home.css';
+@import 'landing.css';
+@import 'home.css';
+@import 'auth.css';
+@import 'explore.css';
+@import 'profile.css';

@@ -1,0 +1,46 @@
+#toggler-checkbox {
+  display: none;
+}
+
+.toggler {
+  display: block;
+  width: 4rem;
+  height: 2rem;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--border-radius);
+  position: relative;
+  cursor: pointer;
+}
+
+.ball,
+.sun,
+.moon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-dark);
+  font-size: 1.2rem;
+}
+
+.sun {
+  left: 5px;
+}
+
+.moon {
+  right: 5px;
+}
+
+#toggler-checkbox:checked + .ball {
+  transform: translate(2rem, -50%);
+}
+
+.ball {
+  display: inline;
+  width: 25px;
+  height: 25px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  left: 1px;
+  z-index: 10;
+  transition: transform 0.3s ease-in-out;
+}

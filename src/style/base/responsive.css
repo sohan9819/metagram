@@ -1,134 +1,130 @@
-/* !======================= MEDIA QUERIES FOR SMALL TABLETS AND MOBILES =========================*/
+/* * RESPONSIVE MEDIA QUERY */
 
-@media screen and (max-width: 992px) {
-  nav .search-bar {
+/* ================== HOME PAGE ================== */
+
+/* !======================= max-width: 1200px ======================= */
+@media (max-width: 1200px) {
+  .nav .container {
+    width: 100%;
+    padding: 0rem 1rem;
+  }
+
+  .main .container.home {
+    width: 96%;
+    grid-template-columns: 5rem auto 30vw !important;
+    grid-template-areas: 'left middle right' !important;
+    justify-items: center;
+  }
+
+  .main .container.home .left {
+    width: 5rem;
+    z-index: 5;
+  }
+
+  .main .container .left .profile-tag {
     display: none;
   }
 
-  main .container {
-    grid-template-columns: 0 auto 5rem;
-  }
-
-  main .container .left {
-    grid-column: 3/4;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-  }
-
-  main .container .left .sidebar {
-    border-start-start-radius: var(--card-border-radius);
-    border-start-end-radius: 0;
-    border-end-start-radius: var(--card-border-radius);
-    border-end-end-radius: 0;
-  }
-
-  main .container .left .sidebar > div h3 {
+  .left .sidebar .sidebar-options {
     display: none;
   }
 
-  main .container .middle {
-    grid-column: 1/3;
-  }
-
-  main .container .right {
+  .left .btn {
     display: none;
   }
 }
 
-/* !======================= MEDIA QUERIES FOR SMALL MOBILES =========================*/
-
-@media screen and (max-width: 550px) {
-  nav .search-bar {
+/* !======================= max-width: 992px ======================= */
+@media screen and (max-width: 992px) {
+  .nav .container .search-bar {
     display: none;
   }
 
-  main .container {
-    grid-template-columns: 0 auto 5rem;
+  .main .container.home {
+    grid-template-columns: auto 5rem !important;
+    grid-template-areas: 'middle left' !important;
   }
 
-  main .container .left {
-    grid-column: 1/-1;
+  /* ======================= RIGHT ======================= */
+
+  .main .container.home .right {
+    display: none;
+  }
+}
+
+/* !======================= max-width: 550px ======================= */
+@media screen and (max-width: 550px) {
+  .nav .container .search-bar {
+    display: none;
+  }
+
+  .nav .container .nav-options .create-post-btn {
+    display: none;
+  }
+  .nav .container .nav-options .profile-photo {
+    display: none;
+  }
+
+  .main .container.home {
+    grid-template-columns: 100vw !important;
+    grid-template-areas: 'middle left' !important;
+    margin: 0;
+  }
+
+  /* ======================= LEFT ======================= */
+  .main .container.home .left {
+    grid-area: middle / left;
+  }
+
+  .main .container.home .left .sidebar {
     position: fixed;
-    bottom: 0;
     width: 100%;
-    height: max-content;
-  }
-
-  main .container .left .sidebar {
+    left: 0;
+    bottom: -1px;
     display: flex;
-    justify-content: center;
-    width: max-content;
-    max-width: 100%;
-    bottom: 0;
-    right: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    position: fixed;
-    overflow: hidden;
-    border-start-start-radius: var(--card-border-radius);
-    border-start-end-radius: var(--card-border-radius);
-    border-end-start-radius: 0;
-    border-end-end-radius: 0;
-    box-shadow: 0rem 1.5rem 2.8rem 0.6rem rgba(0, 0, 0, 0.445);
+    justify-content: space-evenly;
+    border-radius: 0;
+    border-start-start-radius: 1rem;
+    border-start-end-radius: 1rem;
+    box-shadow: 0rem 1rem 0.8rem 1.4rem rgba(0, 0, 0, 0.349);
   }
 
-  .left .sidebar .menu-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 4rem;
-    cursor: pointer;
-    translate: all 300ms ease;
-    position: relative;
-  }
-
-  .left .sidebar .menu-item:hover {
-    background: var(--color-light);
-  }
-
-  .left .sidebar .active::before {
-    content: '';
-    display: block;
+  .main .container.home .left .sidebar .menu-item.active:before {
     width: 100%;
     height: 0.5rem;
-    position: absolute;
     bottom: 0;
-    background: var(--color-primary);
   }
 
-  main .container .left .sidebar .sidebar-options {
-    display: none;
-  }
-  main .container .left .sidebar i {
-    margin: 2rem 1rem;
+  .main .container.home .left .sidebar .menu-item .sidebar-icons {
+    margin: 0rem 1.4rem;
   }
 
-  main .container .middle {
-    grid-column: 1/-1;
-  }
-
-  .middle .feeds {
-    padding-bottom: 4rem;
-  }
-
-  main .container .right {
-    display: none;
+  /* ======================= MIDDLE ======================= */
+  .main .container.home .middle {
+    grid-area: middle / left;
+    padding-bottom: 2.8rem !important;
   }
 }
 
-/* !======================= MEDIA QUERIES FOR SMALL MOBILES =========================*/
+/* ================== LANDING PAGE ================== */
 
-@media screen and (max-width: 470px) {
-  nav .create label {
-    display: none;
+/* !======================= max-width: 992px ======================= */
+
+@media (max-width: 1200px) {
+  .main .container.landing .landing-info {
+    grid-column: 1 / -1 !important;
   }
-
-  main .container {
-    grid-template-columns: 100vw;
+  .main .container.landing .landing-image {
+    grid-column: 1 / -1 !important;
+    z-index: -1;
   }
+}
 
-  .middle .feeds {
-    padding-bottom: 4rem;
+/* !======================= max-width: 700px ======================= */
+
+@media screen and (max-width: 700px) {
+  .main .container.landing .landing-info .logo {
+    max-width: 100vw;
+    padding-left: 0.6rem;
   }
 }

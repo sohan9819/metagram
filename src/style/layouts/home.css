@@ -1,64 +1,44 @@
 /* ================ MAIN ================ */
 
-main {
+.main {
   position: relative;
-  top: 5.4rem;
+  top: 4.2rem;
 }
 
-main .container {
+.main .container.home {
   display: grid;
   grid-template-columns: 18vw auto 20vw;
+  grid-template-areas: 'left middle right';
   column-gap: 2rem;
   position: relative;
 }
 
 /* ================ LEFT ================ */
-main .container .left {
+.main .container.home .left {
+  grid-area: left;
   height: max-content;
   position: sticky;
   top: var(--sticky-top-left);
 }
 
-.left .btn {
+.home .left .btn {
   margin-top: 1rem;
   width: 100%;
   text-align: center;
   padding: 1rem 0;
 }
 
+/* ======================= MIDDLE ======================= */
+.main .container.home .middle {
+  grid-area: middle;
+  padding: 1rem 0rem;
+}
+
 /* ======================= RIGHT ======================= */
 
-main .container .right {
+.main .container.home .right {
+  grid-area: 'right';
   height: max-content;
   position: sticky;
   top: var(--sticky-top-left);
-}
-
-/* !======================= MEDIA QUERIES ======================= */
-
-@media screen and (max-width: 1200px) {
-  .container {
-    width: 96%;
-  }
-
-  main .container {
-    grid-template-columns: 5rem auto 30vw;
-  }
-
-  .left {
-    width: 5rem;
-    z-index: 5;
-  }
-
-  main .container .left .profile {
-    display: none;
-  }
-
-  .sidebar h3 {
-    display: none;
-  }
-
-  .left .btn {
-    display: none;
-  }
 }

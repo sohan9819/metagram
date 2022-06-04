@@ -20,6 +20,7 @@ export const Right = () => {
           <FollowUser />
           <FollowUser />
           <FollowUser />
+          <FollowUser />
         </div>
       </div>
     </div>
