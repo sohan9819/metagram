@@ -9,14 +9,12 @@ export const ThemeToggler = () => {
   const toggleCheckbox = useRef(null);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      toggleCheckbox.current.checked = true;
-      dispatch(setTheme('dark'));
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      toggleCheckbox.current.checked = false;
-      dispatch(setTheme('light'));
-    }
+    toggleCheckbox.current.checked = theme === 'dark';
   }, []);
+
+  useEffect(() => {
+    document.body.classList = [theme];
+  }, [theme]);
 
   const themeChangehandler = () => {
     toggleCheckbox.current.checked

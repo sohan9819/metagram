@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  mode: 'dark',
-};
+const initialState = window.matchMedia('(prefers-color-scheme: dark)').matches
+  ? { mode: 'dark' }
+  : { mode: 'light' };
 
 export const themeSlice = createSlice({
   name: 'theme',
@@ -10,7 +10,6 @@ export const themeSlice = createSlice({
   reducers: {
     setTheme: (state, action) => {
       state.mode = action.payload;
-      document.body.classList = [action.payload];
     },
   },
 });
