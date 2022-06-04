@@ -1,7 +1,7 @@
 import { Left, Middle, Right } from '../layouts/all';
-import { Nav, PostForm, Post } from '../components/all';
+import { Nav, Post, ProfileTag } from '../components/all';
 
-export const Home = () => {
+export const Explore = () => {
   return (
     <>
       <Nav />
@@ -12,9 +12,12 @@ export const Home = () => {
         <div className='container home'>
           <Left />
           <Middle>
-            <PostForm />
-
-            {/* <!-- ------------- FEEDS ------------- --> */}
+            <div className='explore-follows'>
+              <ProfileTag />
+              <ProfileTag />
+              <ProfileTag />
+              <ProfileTag />
+            </div>
             <div className='feeds'>
               {/* <!-- ------------- FEED ------------- --> */}
               <Post />
@@ -23,7 +26,6 @@ export const Home = () => {
               <Post />
               {/* <!-- ------------- END OF FEED ------------- --> */}
             </div>
-            {/* <!-- ------------- END OF FEEDS ------------- --> */}
           </Middle>
           <Right />
         </div>

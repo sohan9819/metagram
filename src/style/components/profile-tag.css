@@ -6,11 +6,3 @@
   align-items: center;
   column-gap: 1rem;
 }
-
-/* !======================= MEDIA QUERIES ======================= */
-
-@media screen and (max-width: 1200px) {
-  .profile-tag {
-    display: none;
-  }
-}

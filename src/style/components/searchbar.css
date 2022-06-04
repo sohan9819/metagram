@@ -9,12 +9,19 @@
 
 .search-bar .search-input {
   background: transparent;
-  width: 30vw;
   margin-left: 1rem;
   font-size: 0.9rem;
   color: var(--color-dark);
 }
 
-.nav .search-bar .search-input::placeholder {
+.nav .search-bar .search-input {
+  width: 30vw;
+}
+
+.right .search-bar .search-input {
+  width: 100%;
+}
+
+.search-bar .search-input::placeholder {
   color: var(--color-gray);
 }

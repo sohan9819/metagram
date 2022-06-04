@@ -1,18 +1,20 @@
 import usrProfile from '../assets/images/profile-1.jpg';
-import { SearchBar } from './all';
+import { SearchBar, ThemeToggler } from './all';
+import { NavLink } from 'react-router-dom';
 
 export const Nav = () => {
   return (
     <nav className='nav'>
       <div className='container'>
         <h2 className='log'>
-          <a href='./landing.html'>MetaGram</a>
+          <NavLink to='/'>MetaGram</NavLink>
         </h2>
 
         <SearchBar />
 
         <div className='nav-options'>
-          <label className='btn btn-primary' for='create-post'>
+          <ThemeToggler />
+          <label className='btn btn-primary create-post-btn' for='create-post'>
             Create
           </label>
           <div className='profile-photo'>
