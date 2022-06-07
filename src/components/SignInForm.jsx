@@ -1,29 +1,59 @@
-import { useRef } from 'react';
-import axios from 'axios';
+import { useRef, useState } from 'react';
+import { signin } from '../api/signin';
+import { setCredentials } from '../features/auth/authSlice';
+import { useDispatch } from 'react-redux';
 
 export const SignInForm = () => {
+  const dispatch = useDispatch();
+
   const username = useRef();
   const password = useRef();
 
+  const [errMsg, setErrMsg] = useState({
+    status: false,
+    msg: '',
+  });
+
   const onSubmitHandler = (evt) => {
     evt.preventDefault();
-    axios
-      .post('/api/auth/login', {
-        username: username.current.value,
-        password: password.current.value,
+
+    signin({
+      username: username.current.value,
+      password: password.current.value,
+    })
+      .then(({ user, token }) => {
+        dispatch(setCredentials({ user, token }));
       })
-      .then((res) => res.data)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err, err.data, err.message);
+      .catch((error) => {
+        if (error.response.status === 401) {
+          setErrMsg({ status: true, msg: 'Missing password' });
+        } else if (error.response.status === 404) {
+          setErrMsg({ status: true, msg: 'Missing username' });
+        } else {
+          setErrMsg({ status: true, msg: 'Login Failed' });
+        }
       });
+
+    navigate('/home');
+    clearFields();
+  };
+
+  const clearFields = () => {
+    username.current.value = '';
+    password.current.value = '';
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className='form'>
-      <p className='form-error-msg'>Please enter valid inputs</p>
+    <form
+      onSubmit={onSubmitHandler}
+      onChange={() => {
+        setErrMsg({ status: false, msg: '' });
+      }}
+      className='form'
+    >
+      <p className={errMsg.status ? 'form-error-msg' : 'offscreen'}>
+        {errMsg.msg}
+      </p>
       <label htmlFor='username' className='auth-label'>
         Username<span className='imp-mark'>*</span>
         <br />
@@ -53,3 +83,9 @@ export const SignInForm = () => {
     </form>
   );
 };
+
+/*
+
+401 => incorrect password 
+404 => username not valid
+*/

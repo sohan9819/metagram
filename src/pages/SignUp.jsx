@@ -21,7 +21,7 @@ export const SignUp = () => {
             <small>
               Already have an account ?{' '}
               <b>
-                <Link to='/auth-signin'>SignIn</Link>
+                <Link to='/auth/signin'>SignIn</Link>
               </b>
             </small>
           </article>

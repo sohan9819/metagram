@@ -1,8 +1,13 @@
 import usrProfile from '../assets/images/profile-1.jpg';
 import { SearchBar, ThemeToggler } from './all';
 import { Link, NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCurrentUserStatus } from '../features/auth/authSlice';
+import { FiLogIn } from 'react-icons/fi';
 
 export const Nav = () => {
+  const authStatus = useSelector(selectCurrentUserStatus);
+
   return (
     <nav className='nav'>
       <div className='container'>
@@ -14,12 +19,29 @@ export const Nav = () => {
 
         <div className='nav-options'>
           <ThemeToggler />
-          <label className='btn btn-primary create-post-btn' for='create-post'>
-            Create
-          </label>
-          <Link to='/profile' className='profile-photo'>
-            <img src={usrProfile} alt='profile picture' />
-          </Link>
+          {authStatus ? (
+            <>
+              <Link
+                to={'/home'}
+                className='btn btn-primary create-post-btn'
+                for='create-post'
+              >
+                Create
+              </Link>
+              <Link to='/profile' className='profile-photo'>
+                <img src={usrProfile} alt='profile picture' />
+              </Link>
+            </>
+          ) : (
+            <Link
+              to={'/auth/signin'}
+              className='btn btn-primary login-btn'
+              for='create-post'
+            >
+              Login
+              <FiLogIn />
+            </Link>
+          )}
         </div>
       </div>
     </nav>

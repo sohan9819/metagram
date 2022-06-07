@@ -64,3 +64,10 @@
   background: var(--color-primary);
   color: white;
 }
+
+.login-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
