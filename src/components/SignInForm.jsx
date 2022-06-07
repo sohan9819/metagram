@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { signin } from '../api/signin';
 import { setCredentials } from '../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 export const SignInForm = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export const SignInForm = () => {
     })
       .then(({ user, token }) => {
         dispatch(setCredentials({ user, token }));
+        axios.defaults.headers.common['authorization'] = token;
       })
       .catch((error) => {
         if (error.response.status === 401) {

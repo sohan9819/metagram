@@ -1,5 +1,11 @@
 import { Left, Right, Middle } from '../layouts/all';
-import { Nav, ProfileForm, ProfileTag, Post } from '../components/all';
+import {
+  Nav,
+  ProfileForm,
+  ProfileTag,
+  Post,
+  ProfileInfo,
+} from '../components/all';
 
 // import usrProfile from '../assets/images/profile-1.jpg';
 
@@ -15,7 +21,10 @@ export const Profile = () => {
           <Left />
           <Middle>
             <ProfileTag />
-            <article class='profile-card edit'>
+            <article className='profile-info'>
+              <ProfileInfo />
+            </article>
+            <article class='profile-card'>
               <ProfileForm />
             </article>
             <div className='feeds'>

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useRef, useState } from 'react';
 import { signup } from '../api/signup';
 import { setCredentials } from '../features/auth/authSlice';
@@ -79,6 +80,7 @@ export const SignUpForm = () => {
     })
       .then(({ user, token }) => {
         dispatch(setCredentials({ user, token }));
+        axios.defaults.headers.common['authorization'] = token;
       })
       .catch((error) => {
         if (error.response.status === 422) {

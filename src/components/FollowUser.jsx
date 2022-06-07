@@ -10,6 +10,7 @@ export const FollowUser = () => {
         <h5 className='username'>Edem Quist</h5>
         <p class='text-muted'>@edem</p>
       </div>
+      <button className='btn btn-primary follow-btn'>Follow</button>
     </div>
   );
 };
