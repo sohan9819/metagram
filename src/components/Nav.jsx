@@ -21,11 +21,7 @@ export const Nav = () => {
           <ThemeToggler />
           {authStatus ? (
             <>
-              <Link
-                to={'/home'}
-                className='btn btn-primary create-post-btn'
-                for='create-post'
-              >
+              <Link to={'/home'} className='btn btn-primary create-post-btn'>
                 Create
               </Link>
               <Link to='/profile' className='profile-photo'>

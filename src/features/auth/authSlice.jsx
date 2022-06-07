@@ -15,11 +15,12 @@ export const authSlice = createSlice({
       state.authStatus = true;
       state.user = user;
       state.token = token;
-      console.log('Set the user credentials ');
     },
     logout: (state, action) => {
+      state.authStatus = false;
       state.user = null;
       state.token = null;
+      localStorage.clear();
     },
   },
 });
