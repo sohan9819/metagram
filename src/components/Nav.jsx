@@ -11,7 +11,11 @@ import { FiLogIn } from 'react-icons/fi';
 export const Nav = () => {
   const authStatus = useSelector(selectCurrentUserStatus);
   const user = useSelector(selectCurrentUser);
-  const { username, nickname, profile } = user;
+  // const { username, nickname, profile } = user;
+
+  const username = user?.username;
+  const nickname = user?.nickname;
+  const profile = user?.profile;
 
   return (
     <nav className='nav'>
