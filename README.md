@@ -46,3 +46,5 @@ $ cd metagram
 $ npm install or yarn install
 $ npm run start or yarn start
 ```
+
+_made by [SnickerDev](https://https://github.com/sohan9819)_
