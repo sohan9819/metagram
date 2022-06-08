@@ -5,23 +5,6 @@ export const ProfileInfo = () => {
   const user = useSelector(selectCurrentUser);
   const { followers, following, createdAt } = user;
 
-  // let formatedDate = new Date(createdAt).toLocaleString('en-US', {
-  //   timeZone: 'Asia/Kolkata',
-  //   weekday: 'long',
-  //   year: 'numeric',
-  //   month: 'short',
-  //   day: 'numeric',
-  // });
-
-  // let date = new Date(createdAt).toLocaleDateString('en-us', {
-  // weekday: 'long',
-  // year: 'numeric',
-  // month: 'short',
-  // day: 'numeric',
-  // });
-
-  // console.log(formatedDate);
-
   return (
     <>
       <div className='created-at'>

@@ -21,7 +21,7 @@
 
 .left .sidebar .sidebar-icons {
   font-size: 1.4rem;
-  color: var(--color-gray);
+  color: var(--color-secondary);
   margin-left: 2rem;
   position: relative;
 }
