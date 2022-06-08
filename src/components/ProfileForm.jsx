@@ -4,9 +4,9 @@ import {
   selectCurrentUser,
   selectCurrentToken,
   updateUser,
-} from '../features/auth/authSlice';
+} from 'features/auth/authSlice';
 import { useEffect, useRef, useState } from 'react';
-import { updateProfile } from '../api/updateProfile';
+import { updateProfile } from 'api/updateProfile';
 import { useDispatch } from 'react-redux';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -197,6 +197,7 @@ export const ProfileForm = () => {
             placeholder='Description'
             ref={describtionInput}
             readOnly={!formEdit}
+            maxLength='180'
           />
         </label>
         <button className='btn btn-primary submit-btn' type='submit'>
