@@ -1,29 +1,91 @@
+import { useRef, useState } from 'react';
+import { signin } from '../api/signin';
+import { setCredentials } from '../features/auth/authSlice';
+import { useDispatch } from 'react-redux';
+
 export const SignInForm = () => {
+  const dispatch = useDispatch();
+
+  const username = useRef();
+  const password = useRef();
+
+  const [errMsg, setErrMsg] = useState({
+    status: false,
+    msg: '',
+  });
+
+  const onSubmitHandler = (evt) => {
+    evt.preventDefault();
+
+    signin({
+      username: username.current.value,
+      password: password.current.value,
+    })
+      .then(({ user, token }) => {
+        dispatch(setCredentials({ user, token }));
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          setErrMsg({ status: true, msg: 'Missing password' });
+        } else if (error.response.status === 404) {
+          setErrMsg({ status: true, msg: 'Missing username' });
+        } else {
+          setErrMsg({ status: true, msg: 'Login Failed' });
+        }
+      });
+
+    navigate('/home');
+    clearFields();
+  };
+
+  const clearFields = () => {
+    username.current.value = '';
+    password.current.value = '';
+  };
+
   return (
-    <form action='' class='form'>
-      <label for='email' class='auth-label'>
-        Email<span class='imp-mark'>*</span>
+    <form
+      onSubmit={onSubmitHandler}
+      onChange={() => {
+        setErrMsg({ status: false, msg: '' });
+      }}
+      className='form'
+    >
+      <p className={errMsg.status ? 'form-error-msg' : 'offscreen'}>
+        {errMsg.msg}
+      </p>
+      <label htmlFor='username' className='auth-label'>
+        Username<span className='imp-mark'>*</span>
         <br />
         <input
-          type='email'
-          class='auth-input'
-          placeholder='Email Address'
+          type='text'
+          id='username'
+          className='auth-input'
+          placeholder='Username'
+          ref={username}
           required
         />
       </label>
-      <label for='password' class='auth-label'>
-        Password<span class='imp-mark'>*</span>
+      <label htmlFor='password' className='auth-label'>
+        Password<span className='imp-mark'>*</span>
         <br />
         <input
           type='password'
-          class='auth-input'
+          className='auth-input'
           placeholder='Password'
+          ref={password}
           required
         />
       </label>
-      <button class='btn btn-primary' type='submit'>
+      <button className='btn btn-primary' type='submit'>
         SignIn
       </button>
     </form>
   );
 };
+
+/*
+
+401 => incorrect password 
+404 => username not valid
+*/

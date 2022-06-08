@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Liq from '../assets/images/liq.png';
 import { Nav, SignUpForm } from '../components/all';
 import { Link } from 'react-router-dom';
@@ -21,7 +21,7 @@ export const SignUp = () => {
             <small>
               Already have an account ?{' '}
               <b>
-                <Link to='/auth-signin'>SignIn</Link>
+                <Link to='/auth/signin'>SignIn</Link>
               </b>
             </small>
           </article>

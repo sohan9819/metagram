@@ -7,7 +7,7 @@ export const Landing = () => {
   const navigate = useNavigate();
 
   const onClickHandler = () => {
-    navigate('/auth-signin');
+    navigate('/auth/signin');
   };
 
   return (

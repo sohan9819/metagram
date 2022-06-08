@@ -20,7 +20,7 @@ export const SignIn = () => {
             <small>
               Don't have an account ?{' '}
               <b>
-                <Link to='/auth-signup'>SignUp</Link>
+                <Link to='/auth/signup'>SignUp</Link>
               </b>
             </small>
           </article>

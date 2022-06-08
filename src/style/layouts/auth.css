@@ -64,9 +64,37 @@
   max-width: 18rem;
   border-radius: var(--border-radius);
   padding: 0.4rem 0.8rem;
+  color-scheme: light;
 }
 
 .main .container.auth .auth-card .form .imp-mark {
   color: var(--color-danger);
   margin-left: 0.6rem;
 }
+
+.main .container.auth .auth-card .form .form-error-msg {
+  color: var(--color-dark);
+  background: var(--color-danger);
+  border-radius: var(--border-radius);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 0rem 0.8rem;
+  margin-top: 0.2rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: reveal 0.3s ease-in forwards;
+}
+
+.main .container.auth .auth-card .form .offscreen {
+  display: none;
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+/* --color-success
+--color-danger */
