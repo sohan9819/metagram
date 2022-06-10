@@ -30,11 +30,23 @@
   gap: 1rem;
   margin-bottom: 1rem;
   align-items: start;
+  /* padding: 0.1rem 0.1rem;
+  border-radius: 0.6rem; */
 }
+
+/* .right .follow-users .follow-user:hover {
+  background: var(--color-secondary);
+} */
 
 .right .follow-user .profile-photo {
   position: relative;
   overflow: visible;
+}
+
+.right .follow-user .profile-photo img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .right .profile-photo img {

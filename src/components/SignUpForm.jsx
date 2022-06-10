@@ -1,10 +1,9 @@
-import axios from 'axios';
 import React, { useRef, useState } from 'react';
 import { signup } from '../api/signup';
 import { setCredentials } from '../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,12}$/;
 const NICK_REGEX = /^[@][A-z0-9-_]{3,12}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
@@ -30,7 +29,7 @@ export const SignUpForm = () => {
       username.current.setCustomValidity('');
     } else {
       username.current.setCustomValidity(
-        '4 to 24 characters.\nMust begin with a letter.\nLetters, numbers, underscores, hyphens allowed.'
+        '4 to 12 characters.\nMust begin with a letter.\nLetters, numbers, underscores, hyphens allowed.'
       );
     }
   };
@@ -80,7 +79,6 @@ export const SignUpForm = () => {
     })
       .then(({ user, token }) => {
         dispatch(setCredentials({ user, token }));
-        axios.defaults.headers.common['authorization'] = token;
       })
       .catch((error) => {
         if (error.response.status === 422) {

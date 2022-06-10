@@ -5,11 +5,29 @@ import {
   ProfileTag,
   Post,
   ProfileInfo,
+  UserPosts,
 } from '../components/all';
+import { selectCurrentUser } from 'features/auth/authSlice';
+import { useSelector } from 'react-redux';
 
 // import usrProfile from '../assets/images/profile-1.jpg';
 
 export const Profile = () => {
+  const user = useSelector(selectCurrentUser);
+  // const {
+  //   describtion,
+  //   email,
+  //   followers,
+  //   following,
+  //   id,
+  //   nickname,
+  //   password,
+  //   profile,
+  //   updatedAt,
+  //   username,
+  //   _id,
+  // } = user;
+
   return (
     <>
       <Nav />
@@ -20,18 +38,19 @@ export const Profile = () => {
         <div className='container home'>
           <Left />
           <Middle>
-            <ProfileTag />
+            <ProfileTag {...user} />
             <article className='profile-info'>
-              <ProfileInfo />
+              <ProfileInfo user={user} />
             </article>
             <article class='profile-card'>
-              <ProfileForm />
+              <ProfileForm user={user} />
             </article>
             <div className='feeds'>
               <h2>Recent Posts</h2>
+              {/* <Post />
               <Post />
-              <Post />
-              <Post />
+              <Post /> */}
+              <UserPosts {...user} />
             </div>
           </Middle>
           <Right />

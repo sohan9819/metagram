@@ -12,6 +12,25 @@
   justify-content: space-between;
 }
 
+.middle .feed .post-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.middle .feed .head .post-option {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.middle .feed .head .post-option.delete {
+  color: var(--color-danger);
+}
+.middle .feed .head .post-option.edit {
+  color: var(--color-secondary);
+}
+
 .middle .feed .user {
   display: flex;
   gap: 1rem;
@@ -30,6 +49,8 @@
 .middle .feed .post .post-image {
   margin: 0.4rem 0 0rem;
   border-radius: var(--card-border-radius);
+  object-fit: cover;
+  aspect-ratio: 2/1;
 }
 
 .middle .feed .action-buttons {
@@ -43,6 +64,10 @@
 .middle .feed .action-buttons .interaction-buttons {
   display: flex;
   gap: 0.8rem;
+}
+
+.middle .feed .text-muted {
+  cursor: pointer;
 }
 
 .middle .liked-by {
@@ -99,7 +124,7 @@
 
 .comment {
   display: grid;
-  grid-template-columns: auto 1fr 1rem;
+  grid-template-columns: auto 1fr 2rem;
   padding: 0.4rem 0rem;
 }
 
@@ -109,4 +134,28 @@
 
 .comment .comment-text {
   font-weight: 200;
+}
+
+.comment .comment-likes {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* ################# COMMENTS FORM  ################# */
+
+.comment-form.comment {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  padding: 0.4rem 0.6rem;
+}
+
+.comment-form.comment .comment-text-area {
+  resize: none;
+}
+
+.comment-form.comment .comment-btn {
+  margin-top: 0.6rem;
 }

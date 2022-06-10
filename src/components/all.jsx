@@ -11,6 +11,11 @@ import { SignInForm } from './SignInForm';
 import { SignUpForm } from './SignUpForm';
 import { ProfileForm } from './ProfileForm';
 import { ProfileInfo } from './ProfileInfo';
+import { PostsList } from './PostsList';
+import { CommentForm } from './CommentForm';
+import { Preloader } from './Preloader';
+import { UserPosts } from './UserPosts';
+import { PostEditForm } from './PostEditForm';
 
 export {
   Nav,
@@ -26,4 +31,9 @@ export {
   SignUpForm,
   ProfileForm,
   ProfileInfo,
+  PostsList,
+  CommentForm,
+  Preloader,
+  UserPosts,
+  PostEditForm,
 };

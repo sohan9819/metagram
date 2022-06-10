@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../features/auth/authSlice';
+import { timeAgo } from 'utilities/TimeAgo';
 
 export const ProfileInfo = () => {
   const user = useSelector(selectCurrentUser);
@@ -9,15 +10,7 @@ export const ProfileInfo = () => {
     <>
       <div className='created-at'>
         <small>Created at </small>
-        <h3>
-          {new Date(createdAt).toLocaleString('en-US', {
-            timeZone: 'Asia/Kolkata',
-            weekday: 'long',
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-          })}
-        </h3>
+        <h3>{timeAgo(createdAt)}</h3>
       </div>
       <div className='social-stats'>
         <div className='followers'>

@@ -1,6 +1,12 @@
 import { SearchBar, FollowUser } from '../components/all';
+import { useSelector } from 'react-redux';
+import { selectAllUsers } from 'features/users/usersSlice';
+import { selectCurrentUser } from 'features/auth/authSlice';
 
 export const Right = () => {
+  const allUsers = useSelector(selectAllUsers);
+  const user = useSelector(selectCurrentUser);
+
   return (
     // <!-- =============== RIGHT =============== -->
     <div className='right'>
@@ -12,15 +18,11 @@ export const Right = () => {
         <SearchBar />
 
         <div className='follow-users-list'>
-          <FollowUser />
-          <FollowUser />
-          <FollowUser />
-          <FollowUser />
-          <FollowUser />
-          <FollowUser />
-          <FollowUser />
-          <FollowUser />
-          <FollowUser />
+          {allUsers
+            .filter((followUser) => followUser._id != user._id)
+            .map((user) => (
+              <FollowUser user={user} key={user._id} />
+            ))}
         </div>
       </div>
     </div>
