@@ -16,6 +16,8 @@ import { CommentForm } from './CommentForm';
 import { Preloader } from './Preloader';
 import { UserPosts } from './UserPosts';
 import { PostEditForm } from './PostEditForm';
+import { PostPreview } from './PostPreview';
+import { Comment } from './Comment';
 
 export {
   Nav,
@@ -23,6 +25,8 @@ export {
   SideBar,
   ProfileTag,
   Post,
+  PostEditForm,
+  PostPreview,
   PostForm,
   FollowUser,
   ThemeToggler,
@@ -35,5 +39,5 @@ export {
   CommentForm,
   Preloader,
   UserPosts,
-  PostEditForm,
+  Comment,
 };

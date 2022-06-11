@@ -53,7 +53,7 @@ export const PostForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className='create-post-form'>
+    <form onSubmit={onSubmitHandler} className='create-post-form post-form'>
       <div className='form-head'>
         <div className='profile-photo'>
           <img src={profile} alt='profile picture' />

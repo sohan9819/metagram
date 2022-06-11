@@ -21,10 +21,13 @@ import { selectCurrentUser } from 'features/auth/authSlice';
 import { selectAllUsers } from 'features/users/usersSlice';
 import { CommentForm, Comment, PostEditForm } from './all';
 
-export const Post = ({ post }) => {
-  const [hideComment, setHideComment] = useState(true);
+export const PostPreview = ({
+  post,
 
-  const [postEditState, setPostEditState] = useState(false);
+  postEditState,
+  setPostEditState,
+}) => {
+  const [hideComment, setHideComment] = useState(true);
 
   const { user_id, body, image, createdAt, _id } = post;
 
