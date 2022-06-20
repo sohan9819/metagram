@@ -2,10 +2,16 @@ import { SearchBar, FollowUser } from '../components/all';
 import { useSelector } from 'react-redux';
 import { selectAllUsers } from 'features/users/usersSlice';
 import { selectCurrentUser } from 'features/auth/authSlice';
+import { useGetUsersQuery } from 'features/users/usersSlice';
+import { Preloader } from '../components/all';
+import { useEffect } from 'react';
 
 export const Right = () => {
-  const allUsers = useSelector(selectAllUsers);
+  // const allUsers = useSelector(selectAllUsers);
+  const { data, error, isLoading, isSuccess } = useGetUsersQuery();
+  // const allUsers = data;
   const user = useSelector(selectCurrentUser);
+  console.log(error);
 
   return (
     // <!-- =============== RIGHT =============== -->
@@ -18,11 +24,17 @@ export const Right = () => {
         <SearchBar />
 
         <div className='follow-users-list'>
-          {allUsers
+          {/* {allUsers
             .filter((followUser) => followUser._id != user._id)
             .map((user) => (
               <FollowUser user={user} key={user._id} />
-            ))}
+            ))} */}
+          {isLoading && <Preloader />}
+          {error && <h2>Something went wrong</h2>}
+          {isSuccess &&
+            data?.users
+              .filter((followUser) => followUser._id != user._id)
+              .map((user) => <FollowUser user={user} key={user._id} />)}
         </div>
       </div>
     </div>

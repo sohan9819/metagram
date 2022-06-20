@@ -1,47 +1,31 @@
 import { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectCurrentUser } from 'features/auth/authSlice';
-import { addNewPost } from 'features/posts/postsSlice';
-import { useState } from 'react';
+import { useCreatePostMutation } from 'features/posts/postsSlice';
 
 export const PostForm = () => {
+  const [createPost] = useCreatePostMutation();
+
   const user = useSelector(selectCurrentUser);
   const { _id, profile, username, nickname } = user;
 
-  console.log('profile', profile);
-
-  const [addRequestStatus, setAddRequestStatus] = useState('idle');
-
-  const dispatch = useDispatch();
+  // console.log('profile', profile);
 
   const postBody = useRef();
   const postImage = useRef();
 
-  const onSubmitHandler = (evt) => {
+  const onSubmitHandler = async (evt) => {
     evt.preventDefault();
 
-    if (
-      (postBody.current.value || postImage.current.value) &&
-      addRequestStatus === 'idle'
-    ) {
-      try {
-        setAddRequestStatus('pending');
-        console.log(addRequestStatus);
-        dispatch(
-          addNewPost({
-            body: postBody.current.value.replace(/\n\r?/g, '<br />'),
-            image: postImage.current.value,
-            user_id: _id,
-          })
-        ).unwrap();
-        clearFields();
-      } catch (error) {
-        console.log(addRequestStatus);
-        console.error('Failed to save the post', error);
-      } finally {
-        console.log(addRequestStatus);
-        setAddRequestStatus('idle');
-      }
+    if (postBody.current.value || postImage.current.value) {
+      let post = {
+        body: postBody.current.value.replace(/\n\r?/g, '<br />'),
+        image: postImage.current.value,
+      };
+
+      await createPost(post);
+
+      clearFields();
     } else {
       console.log('Incomplete input');
     }

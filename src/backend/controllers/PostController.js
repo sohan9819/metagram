@@ -78,7 +78,7 @@ export const createPostHandler = function (schema, request) {
       );
     }
     const { postData } = JSON.parse(request.requestBody);
-    console.log('Backed recieved post   ', postData);
+    // console.log('Backed recieved post   ', postData);
     const post = {
       _id: uuid(),
       ...postData,
@@ -126,7 +126,7 @@ export const editPostHandler = function (schema, request) {
     const postId = request.params.postId;
     const { postData } = JSON.parse(request.requestBody);
     let post = schema.posts.findBy({ _id: postId }).attrs;
-    if (post.username !== user.username) {
+    if (post.user_id !== user._id) {
       return new Response(
         400,
         {},
@@ -269,7 +269,7 @@ export const deletePostHandler = function (schema, request) {
     }
     const postId = request.params.postId;
     let post = schema.posts.findBy({ _id: postId }).attrs;
-    if (post.username !== user.username) {
+    if (post.user_id !== user._id) {
       return new Response(
         400,
         {},

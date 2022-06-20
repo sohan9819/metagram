@@ -18,27 +18,43 @@ import { timeAgo } from 'utilities/TimeAgo';
 
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from 'features/auth/authSlice';
-import { selectAllUsers } from 'features/users/usersSlice';
-import { CommentForm, Comment, PostEditForm } from './all';
+import { CommentForm, Comment, PostEditForm, Preloader } from './all';
+import {
+  useDeletePostMutation,
+  useGetCommentsQuery,
+} from 'features/posts/postsSlice';
 
 export const PostPreview = ({
   post,
-
   postEditState,
   setPostEditState,
+  author,
 }) => {
+  const [deletePost] = useDeletePostMutation();
+
   const [hideComment, setHideComment] = useState(true);
-
   const { user_id, body, image, createdAt, _id } = post;
-
   const user = useSelector(selectCurrentUser);
-  const users = useSelector(selectAllUsers);
-
-  const author = users.find((usr) => usr._id === user_id);
 
   const editHanler = () => {
     setPostEditState(true);
   };
+
+  let errorContent;
+
+  const deletehandler = async () => {
+    const { data, error, isLoading, isSuccess } = await deletePost(_id);
+
+    if (error) {
+      console.log('Error ', error);
+    }
+
+    if (isSuccess) {
+      console.log('Data', data);
+    }
+  };
+
+  const { data, error, isLoading, isSuccess } = useGetCommentsQuery(_id);
 
   return (
     <div key={_id} className='feed'>
@@ -55,12 +71,21 @@ export const PostPreview = ({
           </div>
         </div>
         <div className='post-options'>
-          <span className='post-option edit' onClick={editHanler}>
-            {author?._id === user._id ? <FiEdit2 /> : ''}
-          </span>
-          <span className='post-option delete'>
-            {author?._id === user._id ? <FiTrash2 /> : ''}
-          </span>
+          {author?._id === user._id ? (
+            <span className='post-option edit' onClick={editHanler}>
+              <FiEdit2 />
+            </span>
+          ) : (
+            ''
+          )}
+
+          {author?._id === user._id ? (
+            <span className='post-option delete'>
+              <FiTrash2 onClick={deletehandler} />
+            </span>
+          ) : (
+            ''
+          )}
         </div>
       </div>
       <div className='post'>
@@ -117,7 +142,7 @@ export const PostPreview = ({
       </div>
       <div className={hideComment ? 'comments hide' : 'comments'}>
         <CommentForm {...user} />
-        <Comment />
+        {/*         <Comment />
         <hr className='comment-divider' />
         <Comment />
         <hr className='comment-divider' />
@@ -128,7 +153,10 @@ export const PostPreview = ({
         <Comment />
         <hr className='comment-divider' />
         <Comment />
-        <hr className='comment-divider' />
+        <hr className='comment-divider' /> */}
+        {isLoading && <Preloader />}
+        {error && <h2>Something went wrong</h2>}
+        {isSuccess && console.log(data)}
       </div>
     </div>
   );

@@ -5,12 +5,12 @@ import { makeServer } from './server';
 import { BrowserRouter } from 'react-router-dom';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
-import { fetchUsers } from './features/users/usersSlice';
+// import { getUsers } from './features/users/usersSlice';
 
 // Call make Server
 makeServer();
 
-store.dispatch(fetchUsers());
+// store.dispatch(getUsers());
 
 ReactDOM.render(
   <BrowserRouter>

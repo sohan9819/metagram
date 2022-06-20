@@ -1,15 +1,43 @@
+import { useEffect, useRef } from 'react';
+import { useEditPostMutation } from 'features/posts/postsSlice';
+
 export const PostEditForm = ({
   post,
   author,
   postEditState,
   setPostEditState,
 }) => {
+  const [editPost] = useEditPostMutation();
+
   const { username, nickname, profile } = author;
 
   const { user_id, body, image, createdAt, _id } = post;
 
-  const onSubmitHandler = (evt) => {
+  const bodyInput = useRef();
+  const imageInput = useRef();
+
+  useEffect(() => {
+    bodyInput.current.value = body.replace(/<br\s*\/?>/gi, '\n');
+    imageInput.current.value = image;
+  }, [post]);
+
+  const onSubmitHandler = async (evt) => {
     evt.preventDefault();
+
+    const { data, error, isLoading, isSuccess } = await editPost({
+      ...post,
+      body: bodyInput.current.value.replace(/\n\r?/g, '<br />'),
+      image: imageInput.current.value,
+    });
+
+    if (error) {
+      console.log('Error ', error);
+    }
+
+    if (isSuccess) {
+      console.log('Data ', data);
+    }
+
     setPostEditState(false);
   };
 
@@ -29,13 +57,21 @@ export const PostEditForm = ({
           className='post-text-input'
           placeholder="what's on you mind, Diana ?"
           maxLength={200}
+          ref={bodyInput}
         />
         <input
           className='post-image-input'
           type='url'
           placeholder='Like to share some picture memories ?'
+          ref={imageInput}
         />
         {image !== '' ? (
+          <img className='post-image-preview ' src={image} alt='' />
+        ) : (
+          ''
+        )}
+
+        {imageInput.current && imageInput.current.value !== '' ? (
           <img className='post-image-preview ' src={image} alt='' />
         ) : (
           ''

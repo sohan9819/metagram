@@ -1,14 +1,13 @@
 import { PostEditForm, PostPreview } from './all';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectAllUsers } from 'features/users/usersSlice';
+import { useGetUserQuery } from 'features/users/usersSlice';
 
 export const Post = ({ post }) => {
   const [postEditState, setPostEditState] = useState(false);
   const { user_id } = post;
-  const allUsers = useSelector(selectAllUsers);
 
-  const author = allUsers.find((user) => user._id === user_id);
+  const author = useGetUserQuery(user_id).data?.user;
 
   const data = {
     post: post,

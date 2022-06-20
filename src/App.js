@@ -7,7 +7,6 @@ import {
   selectCurrentUser,
   selectCurrentUserStatus,
 } from 'features/auth/authSlice';
-import { fetchUsers } from 'features/users/usersSlice';
 import { useEffect } from 'react';
 
 function App() {
@@ -21,10 +20,10 @@ function App() {
       axios.defaults.headers.common['authorization'] = token;
     }
   }, [token, authStatus]);
-
+  /* 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, [user]);
+  }, [user]); */
 
   return (
     <div className='App'>
