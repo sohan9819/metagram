@@ -1,0 +1,35 @@
+.profile-info {
+  background-color: var(--color-white);
+  border-radius: var(--card-border-radius);
+  padding: 0.6rem 1rem;
+  margin: 1rem 0rem;
+}
+
+.profile-info .created-at small {
+  color: var(--color-secondary);
+}
+
+.profile-info .created-at {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  margin: 0rem auto 1rem;
+  gap: 1rem;
+  font-size: 0.8rem;
+}
+
+.profile-info .social-stats {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 1.4rem;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.profile-info .social-stats .followers small,
+.profile-info .social-stats .following small {
+  font-size: 1rem;
+  color: var(--color-secondary);
+}

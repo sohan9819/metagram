@@ -10,6 +10,7 @@ import { ButtonCta } from './Buttons';
 import { SignInForm } from './SignInForm';
 import { SignUpForm } from './SignUpForm';
 import { ProfileForm } from './ProfileForm';
+import { ProfileInfo } from './ProfileInfo';
 
 export {
   Nav,
@@ -24,4 +25,5 @@ export {
   SignInForm,
   SignUpForm,
   ProfileForm,
+  ProfileInfo,
 };

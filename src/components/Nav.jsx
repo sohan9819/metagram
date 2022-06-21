@@ -1,12 +1,21 @@
-import usrProfile from '../assets/images/profile-1.jpg';
+import usrProfile from '../assets/images/default_profile.jpg';
 import { SearchBar, ThemeToggler } from './all';
 import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectCurrentUserStatus } from '../features/auth/authSlice';
+import {
+  selectCurrentUserStatus,
+  selectCurrentUser,
+} from '../features/auth/authSlice';
 import { FiLogIn } from 'react-icons/fi';
 
 export const Nav = () => {
   const authStatus = useSelector(selectCurrentUserStatus);
+  const user = useSelector(selectCurrentUser);
+  // const { username, nickname, profile } = user;
+
+  const username = user?.username;
+  const nickname = user?.nickname;
+  const profile = user?.profile;
 
   return (
     <nav className='nav'>
@@ -25,7 +34,10 @@ export const Nav = () => {
                 Create
               </Link>
               <Link to='/profile' className='profile-photo'>
-                <img src={usrProfile} alt='profile picture' />
+                <img
+                  src={profile === '' ? usrProfile : profile}
+                  alt='profile picture'
+                />
               </Link>
             </>
           ) : (
