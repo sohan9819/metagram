@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Mockman from 'mockman-js';
 import {
   Landing,
@@ -8,41 +8,64 @@ import {
   Profile,
   SignIn,
   SignUp,
-} from '../pages/all';
-import { useSelector } from 'react-redux';
-import { selectCurrentUserStatus } from '../features/auth/authSlice';
+  Error404,
+} from 'pages/all';
+import { RequireAuth } from './RequireAuth';
+import { RequireNoAuth } from './RequireNoAuth';
 
 export const RouterRoutes = () => {
-  const authStatus = useSelector(selectCurrentUserStatus);
-  console.log(authStatus);
-
   return (
     <Routes>
       <Route path='/' element={<Landing />} />
       <Route
         path='/home'
-        element={authStatus ? <Home /> : <Navigate to={'/auth/signin'} />}
+        element={
+          <RequireAuth>
+            <Home />
+          </RequireAuth>
+        }
       />
       <Route
         path='/explore'
-        element={authStatus ? <Explore /> : <Navigate to={'/auth/signin'} />}
+        element={
+          <RequireAuth>
+            <Explore />
+          </RequireAuth>
+        }
       />
       <Route
         path='/bookmarks'
-        element={authStatus ? <Bookmarks /> : <Navigate to={'/auth/signin'} />}
+        element={
+          <RequireAuth>
+            <Bookmarks />
+          </RequireAuth>
+        }
       />
       <Route
         path='/profile'
-        element={authStatus ? <Profile /> : <Navigate to={'/auth/signin'} />}
+        element={
+          <RequireAuth>
+            <Profile />
+          </RequireAuth>
+        }
       />
       <Route
         path='/auth/signin'
-        element={authStatus ? <Navigate to='/home' /> : <SignIn />}
+        element={
+          <RequireNoAuth>
+            <SignIn />
+          </RequireNoAuth>
+        }
       />
       <Route
         path='/auth/signup'
-        element={authStatus ? <Navigate to='/home' /> : <SignUp />}
+        element={
+          <RequireNoAuth>
+            <SignUp />
+          </RequireNoAuth>
+        }
       />
+      <Route path='*' element={<Error404 />} />
       <Route path='/mock' element={<Mockman />} />
     </Routes>
   );

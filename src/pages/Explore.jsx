@@ -1,5 +1,6 @@
 import { Left, Middle, Right } from '../layouts/all';
-import { Nav, Post, ProfileTag } from '../components/all';
+import { Nav, ProfileTag } from '../components/all';
+import { PostsList } from 'components/PostsList';
 
 export const Explore = () => {
   return (
@@ -20,10 +21,11 @@ export const Explore = () => {
             </div>
             <div className='feeds'>
               {/* <!-- ------------- FEED ------------- --> */}
+              {/* <Post />
               <Post />
               <Post />
-              <Post />
-              <Post />
+              <Post /> */}
+              <PostsList />
               {/* <!-- ------------- END OF FEED ------------- --> */}
             </div>
           </Middle>

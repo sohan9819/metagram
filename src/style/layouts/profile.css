@@ -119,3 +119,8 @@
     transform: translateY(0px);
   }
 }
+
+.main .container.home .profile-card .form.edit .offscreen,
+.main .container.home .profile-card .form .offscreen {
+  display: none;
+}

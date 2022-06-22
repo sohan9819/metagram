@@ -1,5 +1,5 @@
-import { Left, Middle, Right } from '../layouts/all';
-import { Nav, PostForm, Post } from '../components/all';
+import { Left, Middle, Right } from 'layouts/all';
+import { Nav, PostForm, Post, PostsList } from 'components/all';
 
 export const Home = () => {
   return (
@@ -17,10 +17,11 @@ export const Home = () => {
             {/* <!-- ------------- FEEDS ------------- --> */}
             <div className='feeds'>
               {/* <!-- ------------- FEED ------------- --> */}
+              {/* <Post />
               <Post />
               <Post />
-              <Post />
-              <Post />
+              <Post /> */}
+              <PostsList />
               {/* <!-- ------------- END OF FEED ------------- --> */}
             </div>
             {/* <!-- ------------- END OF FEEDS ------------- --> */}

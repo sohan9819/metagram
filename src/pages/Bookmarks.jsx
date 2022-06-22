@@ -14,10 +14,10 @@ export const Bookmarks = () => {
           <Middle>
             <div className='feeds'>
               {/* <!-- ------------- FEED ------------- --> */}
+              {/* <Post />
               <Post />
               <Post />
-              <Post />
-              <Post />
+              <Post /> */}
               {/* <!-- ------------- END OF FEED ------------- --> */}
             </div>
           </Middle>

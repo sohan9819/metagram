@@ -1,21 +1,16 @@
 import { FiEdit2 } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
-import {
-  selectCurrentUser,
-  selectCurrentToken,
-  updateUser,
-} from 'features/auth/authSlice';
+import { selectCurrentUser, updateUser } from 'features/auth/authSlice';
 import { useEffect, useRef, useState } from 'react';
 import { updateProfile } from 'api/updateProfile';
 import { useDispatch } from 'react-redux';
+// import { default_profile } from 'assets/images/default_profile.jpg';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const NICK_REGEX = /^[@][A-z0-9-_]{3,12}$/;
 
-export const ProfileForm = () => {
+export const ProfileForm = ({ user }) => {
   const dispatch = useDispatch();
-  const user = useSelector(selectCurrentUser);
-  const token = useSelector(selectCurrentToken);
 
   const [formEdit, setFormEdit] = useState(false);
 
@@ -25,8 +20,6 @@ export const ProfileForm = () => {
   });
 
   const {
-    bookmarks,
-    createdAt,
     describtion,
     email,
     followers,
@@ -83,8 +76,7 @@ export const ProfileForm = () => {
   const onSubmitHandler = (evt) => {
     evt.preventDefault();
 
-    const editedUserProfile = {
-      ...user,
+    const userData = {
       username: usernameInput.current.value,
       nickname: nicknameInput.current.value,
       email: emailInput.current.value,
@@ -92,19 +84,17 @@ export const ProfileForm = () => {
       describtion: describtionInput.current.value,
     };
 
-    console.log(editedUserProfile);
+    console.log(userData);
 
-    updateProfile(editedUserProfile, token)
+    updateProfile(userData)
       .then((user) => {
         console.log('updated user ', user);
-        // dispatch(updateUser(user));
+        dispatch(updateUser(user));
       })
       .catch((error) => {
         console.log(error.message);
         setErrMsg({ status: true, msg: error.message });
       });
-
-    dispatch(updateUser(editedUserProfile));
     setFormEdit(false);
   };
 
@@ -133,7 +123,7 @@ export const ProfileForm = () => {
         }}
       >
         <p className={errMsg.status ? 'form-error-msg' : 'offscreen'}>
-          {errMsg.msg}
+          {errMsg.msg} Hello world
         </p>
         <label htmlFor='username' className='auth-label'>
           Username<span className='imp-mark'>*</span>
