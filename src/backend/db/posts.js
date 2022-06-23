@@ -16,6 +16,30 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    comments: [
+      {
+        _id: uuid(),
+        userId: 1,
+        text: 'Interesting',
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
+      },
+      {
+        _id: uuid(),
+        userId: 2,
+        text: 'Wow!',
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
+      },
+    ],
     // username: "adarshbalika",
     user_id: 1,
     createdAt: formatDate(),
@@ -30,6 +54,30 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    comments: [
+      {
+        _id: uuid(),
+        userId: 1,
+        text: 'Interesting',
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
+      },
+      {
+        _id: uuid(),
+        userId: 2,
+        text: 'Wow!',
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
+      },
+    ],
     // username: "adarshbalika",
     user_id: 2,
     createdAt: formatDate(),
@@ -44,6 +92,30 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    comments: [
+      {
+        _id: uuid(),
+        userId: 1,
+        text: 'Interesting',
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
+      },
+      {
+        _id: uuid(),
+        userId: 2,
+        text: 'Wow!',
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
+      },
+    ],
     user_id: 3,
     createdAt: formatDate(),
     updatedAt: formatDate(),

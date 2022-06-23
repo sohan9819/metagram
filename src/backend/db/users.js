@@ -18,6 +18,9 @@ export const users = [
     describtion: '',
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     // _id: uuid(),
@@ -31,6 +34,9 @@ export const users = [
     describtion: '',
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     // _id: uuid(),
@@ -44,6 +50,9 @@ export const users = [
     describtion: '',
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     // _id: uuid(),
@@ -57,6 +66,9 @@ export const users = [
     describtion: '',
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     // _id: uuid(),
@@ -70,6 +82,9 @@ export const users = [
     describtion: '',
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     // _id: uuid(),
@@ -83,6 +98,9 @@ export const users = [
     describtion: '',
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     // _id: uuid(),
@@ -96,6 +114,9 @@ export const users = [
     describtion: '',
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     // _id: uuid(),
@@ -109,6 +130,9 @@ export const users = [
     describtion: '',
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     // _id: uuid(),
@@ -122,6 +146,9 @@ export const users = [
     describtion: '',
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     // _id: uuid(),
@@ -135,6 +162,9 @@ export const users = [
     describtion: '',
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     // _id: uuid(),
@@ -148,5 +178,8 @@ export const users = [
     describtion: '',
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
 ];

@@ -14,16 +14,13 @@ export const postApiSlice = apiSlice.injectEndpoints({
       query: (username) => `/posts/user/${username}`,
       providesTags: ['POST'],
     }),
-    getComments: builder.query({
-      query: (postId) => `/comments/${postId}`,
-      providesTags: ['POST'],
-    }),
     createPost: builder.mutation({
       query: (post) => ({
         url: '/posts',
         method: 'POST',
         body: { postData: post },
       }),
+
       invalidatesTags: ['POST'],
     }),
     editPost: builder.mutation({
@@ -48,7 +45,6 @@ export const {
   useGetPostsQuery,
   useGetPostQuery,
   useGetPostsByUsernameQuery,
-  useGetCommentsQuery,
   useCreatePostMutation,
   useEditPostMutation,
   useDeletePostMutation,

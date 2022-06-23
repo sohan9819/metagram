@@ -76,3 +76,7 @@
   padding: 0.4rem 0.8rem;
   margin-left: auto;
 }
+
+.btn-submit {
+  background-color: var(--color-secondary);
+}
