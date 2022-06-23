@@ -19,10 +19,8 @@ import { timeAgo } from 'utilities/TimeAgo';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from 'features/auth/authSlice';
 import { CommentForm, Comment, PostEditForm, Preloader } from './all';
-import {
-  useDeletePostMutation,
-  useGetCommentsQuery,
-} from 'features/posts/postsSlice';
+import { useDeletePostMutation } from 'features/posts/postsSlice';
+import { useGetCommentsQuery } from 'features/posts/commentsSlice';
 
 export const PostPreview = ({
   post,
@@ -141,7 +139,7 @@ export const PostPreview = ({
         {hideComment ? 'View all 277 comments' : 'Hide comments'}
       </div>
       <div className={hideComment ? 'comments hide' : 'comments'}>
-        <CommentForm {...user} />
+        <CommentForm {...post} />
         {/*         <Comment />
         <hr className='comment-divider' />
         <Comment />
@@ -156,7 +154,19 @@ export const PostPreview = ({
         <hr className='comment-divider' /> */}
         {isLoading && <Preloader />}
         {error && <h2>Something went wrong</h2>}
-        {isSuccess && console.log(data)}
+        {isSuccess && data?.comments.length === 0 ? (
+          <h2>No Comments available</h2>
+        ) : (
+          data?.comments
+            .slice()
+            .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+            .map((comment, index) => (
+              <>
+                <Comment {...comment} postId={_id} key={index} />
+                <hr className='comment-divider' />
+              </>
+            ))
+        )}
       </div>
     </div>
   );

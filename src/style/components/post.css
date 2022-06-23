@@ -136,12 +136,53 @@
   font-weight: 200;
 }
 
+.comment .comment-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12rem;
+  gap: 1rem;
+}
+
 .comment .comment-likes {
-  width: 100%;
+  width: max-content;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 0.6rem;
+  cursor: pointer;
+}
+
+.comment .comment-option {
+  cursor: pointer;
+  position: relative;
+  z-index: 40;
+}
+
+.comment-option .comment-options {
+  position: absolute;
+  top: -5px;
+  left: -4.4rem;
+  background: var(--color-primary);
+  border-radius: 0.6rem;
+  list-style: none;
+  padding: 0rem 0.4rem;
+  font-size: 0.8rem;
+  display: none;
+}
+
+.comment-option:hover .comment-options,
+.comment-option:focus .comment-options {
+  display: block;
+}
+
+.comment-option .comment-options .comment-edit,
+.comment-option .comment-options .comment-delete {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
 /* ################# COMMENTS FORM  ################# */

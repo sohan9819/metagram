@@ -13,6 +13,7 @@ import { v4 as uuid } from 'uuid';
 
 export const getPostCommentsHandler = function (schema, request) {
   const postId = request.params.postId;
+  // console.log('Post id received', postId);
   try {
     const post = schema.posts.findBy({ _id: postId }).attrs;
     return new Response(200, {}, { comments: post.comments });
@@ -52,7 +53,7 @@ export const addPostCommentHandler = function (schema, request) {
     const comment = {
       _id: uuid(),
       ...commentData,
-      username: user.username,
+      userId: user._id,
       votes: { upvotedBy: [], downvotedBy: [] },
       createdAt: formatDate(),
       updatedAt: formatDate(),
@@ -97,7 +98,7 @@ export const editPostCommentHandler = function (schema, request) {
     const commentIndex = post.comments.findIndex(
       (comment) => comment._id === commentId
     );
-    if (post.comments[commentIndex].username !== user.username) {
+    if (post.comments[commentIndex].userId !== user._id) {
       return new Response(
         400,
         {},
@@ -147,8 +148,8 @@ export const deletePostCommentHandler = function (schema, request) {
       (comment) => comment._id === commentId
     );
     if (
-      post.comments[commentIndex].username !== user.username &&
-      post.username !== user.username
+      post.comments[commentIndex].userId !== user._id &&
+      post.user_id !== user._id
     ) {
       return new Response(
         400,
