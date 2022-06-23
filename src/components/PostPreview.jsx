@@ -136,22 +136,14 @@ export const PostPreview = ({
           setHideComment((prev) => !prev);
         }}
       >
-        {hideComment ? 'View all 277 comments' : 'Hide comments'}
+        {hideComment
+          ? data?.comments.length === 0
+            ? 'Be the first to comment'
+            : `View all ${data?.comments.length} comments`
+          : 'Hide comments'}
       </div>
       <div className={hideComment ? 'comments hide' : 'comments'}>
         <CommentForm {...post} />
-        {/*         <Comment />
-        <hr className='comment-divider' />
-        <Comment />
-        <hr className='comment-divider' />
-        <Comment />
-        <hr className='comment-divider' />
-        <Comment />
-        <hr className='comment-divider' />
-        <Comment />
-        <hr className='comment-divider' />
-        <Comment />
-        <hr className='comment-divider' /> */}
         {isLoading && <Preloader />}
         {error && <h2>Something went wrong</h2>}
         {isSuccess && data?.comments.length === 0 ? (
