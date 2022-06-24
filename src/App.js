@@ -20,10 +20,6 @@ function App() {
       axios.defaults.headers.common['authorization'] = token;
     }
   }, [token, authStatus]);
-  /* 
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, [user]); */
 
   return (
     <div className='App'>

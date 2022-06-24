@@ -9,7 +9,6 @@ import { useEffect } from 'react';
 export const Right = () => {
   const { data, error, isLoading, isSuccess } = useGetUsersQuery();
   const user = useSelector(selectCurrentUser);
-  console.log(error);
 
   return (
     // <!-- =============== RIGHT =============== -->

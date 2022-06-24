@@ -1,5 +1,4 @@
 import { apiSlice } from 'features/api/apiSlice';
-import { createSlice } from '@reduxjs/toolkit';
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,8 +8,33 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
     getUser: builder.query({
       query: (id) => `/users/${id}`,
+      providesTags: ['USER'],
+    }),
+    getBookmarks: builder.query({
+      query: () => `/users/bookmark`,
+      providesTags: ['USER'],
+    }),
+    addBookmark: builder.mutation({
+      query: (postId) => ({
+        url: `/users/bookmark/${postId}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['USER'],
+    }),
+    removeBookmark: builder.mutation({
+      query: (postId) => ({
+        url: `/users/remove-bookmark/${postId}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['USER'],
     }),
   }),
 });
 
-export const { useGetUsersQuery, useGetUserQuery } = userApiSlice;
+export const {
+  useGetUsersQuery,
+  useGetUserQuery,
+  useGetBookmarksQuery,
+  useAddBookmarkMutation,
+  useRemoveBookmarkMutation,
+} = userApiSlice;

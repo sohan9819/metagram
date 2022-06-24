@@ -144,3 +144,7 @@ img {
 *::-webkit-scrollbar-thumb:hover {
   background: var(--color-gray);
 }
+
+.empty-data {
+  min-height: 100vh;
+}

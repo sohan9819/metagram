@@ -5,12 +5,9 @@ import { makeServer } from './server';
 import { BrowserRouter } from 'react-router-dom';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
-// import { getUsers } from './features/users/usersSlice';
 
 // Call make Server
 makeServer();
-
-// store.dispatch(getUsers());
 
 ReactDOM.render(
   <BrowserRouter>
