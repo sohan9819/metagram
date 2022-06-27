@@ -20,7 +20,6 @@ export const postApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: { postData: post },
       }),
-
       invalidatesTags: ['POST'],
     }),
     editPost: builder.mutation({
@@ -38,6 +37,20 @@ export const postApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['POST'],
     }),
+    likePost: builder.mutation({
+      query: (postId) => ({
+        url: `/posts/like/${postId}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['POST'],
+    }),
+    dislikePost: builder.mutation({
+      query: (postId) => ({
+        url: `/posts/dislike/${postId}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['POST'],
+    }),
   }),
 });
 
@@ -48,4 +61,6 @@ export const {
   useCreatePostMutation,
   useEditPostMutation,
   useDeletePostMutation,
+  useLikePostMutation,
+  useDislikePostMutation,
 } = postApiSlice;

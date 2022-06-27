@@ -15,11 +15,19 @@ import {
 } from 'react-icons/fi';
 import { useState } from 'react';
 import { timeAgo } from 'utilities/TimeAgo';
-
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { selectCurrentUser } from 'features/auth/authSlice';
+import { selectCurrentUser, updateUser } from 'features/auth/authSlice';
 import { CommentForm, Comment, PostEditForm, Preloader } from './all';
-import { useDeletePostMutation } from 'features/posts/postsSlice';
+import {
+  useDeletePostMutation,
+  useLikePostMutation,
+  useDislikePostMutation,
+} from 'features/posts/postsSlice';
+import {
+  useAddBookmarkMutation,
+  useRemoveBookmarkMutation,
+} from 'features/users/usersSlice';
 import { useGetCommentsQuery } from 'features/posts/commentsSlice';
 
 export const PostPreview = ({
@@ -29,16 +37,27 @@ export const PostPreview = ({
   author,
 }) => {
   const [deletePost] = useDeletePostMutation();
+  const [likePost] = useLikePostMutation();
+  const [dislikePost] = useDislikePostMutation();
+  const [addBookmark] = useAddBookmarkMutation();
+  const [removeBookmark] = useRemoveBookmarkMutation();
+
+  const dispatch = useDispatch();
 
   const [hideComment, setHideComment] = useState(true);
-  const { user_id, body, image, createdAt, _id } = post;
+  const { user_id, body, image, createdAt, _id, likes } = post;
   const user = useSelector(selectCurrentUser);
+
+  const { likeCount, likedBy, dislikedBy } = likes;
+
+  const activeStyle = {
+    fill: 'var(--color-danger)',
+    color: 'var(--color-danger)',
+  };
 
   const editHanler = () => {
     setPostEditState(true);
   };
-
-  let errorContent;
 
   const deletehandler = async () => {
     const { data, error, isLoading, isSuccess } = await deletePost(_id);
@@ -49,6 +68,60 @@ export const PostPreview = ({
 
     if (isSuccess) {
       console.log('Data', data);
+    }
+  };
+
+  const isUserLiked =
+    likedBy.findIndex((author) => author._id === user._id) === -1
+      ? false
+      : true;
+
+  const isUserBookmarked =
+    user.bookmarks.findIndex((post) => post._id === _id) === -1 ? false : true;
+
+  const likeDislikeHandler = async () => {
+    if (isUserLiked) {
+      const { data, error, isSuccess, isLoading } = await dislikePost(_id);
+      if (error) {
+        console.log('Error ', error);
+      }
+
+      if (isSuccess) {
+        console.log('Deleted commment successfully');
+      }
+    } else {
+      const { data, error, isSuccess, isLoading } = await likePost(_id);
+      if (error) {
+        console.log('Error ', error);
+      }
+
+      if (isSuccess) {
+        console.log('Deleted commment successfully');
+      }
+    }
+  };
+
+  const bookmarkHandler = async () => {
+    if (isUserBookmarked) {
+      const { data, error, isSuccess, isLoading } = await removeBookmark(_id);
+
+      if (error) {
+        console.log('Error ', error);
+      }
+
+      if (data?.bookmarks) {
+        dispatch(updateUser({ ...user, ...data }));
+      }
+    } else {
+      const { data, error, isSuccess } = await addBookmark(_id);
+
+      if (error) {
+        console.log('Error ', error);
+      }
+
+      if (data?.bookmarks) {
+        dispatch(updateUser({ ...user, ...data }));
+      }
     }
   };
 
@@ -69,7 +142,7 @@ export const PostPreview = ({
           </div>
         </div>
         <div className='post-options'>
-          {author?._id === user._id ? (
+          {user_id === user._id ? (
             <span className='post-option edit' onClick={editHanler}>
               <FiEdit2 />
             </span>
@@ -77,7 +150,7 @@ export const PostPreview = ({
             ''
           )}
 
-          {author?._id === user._id ? (
+          {user_id === user._id ? (
             <span className='post-option delete'>
               <FiTrash2 onClick={deletehandler} />
             </span>
@@ -95,10 +168,17 @@ export const PostPreview = ({
       <div className='action-buttons'>
         <div className='interaction-buttons'>
           <span>
-            <FiHeart />
+            <FiHeart
+              onClick={likeDislikeHandler}
+              style={isUserLiked ? activeStyle : ''}
+            />
           </span>
           <span>
-            <FiMessageCircle />
+            <FiMessageCircle
+              onClick={() => {
+                setHideComment((prev) => !prev);
+              }}
+            />
           </span>
           <span>
             <FiShare2 />
@@ -106,30 +186,47 @@ export const PostPreview = ({
         </div>
         <div className='bookmark'>
           <span>
-            <FiBookmark />
+            <FiBookmark
+              onClick={bookmarkHandler}
+              style={isUserBookmarked ? activeStyle : ''}
+            />
           </span>
         </div>
       </div>
-      <div className='liked-by'>
-        <span>
-          <img src={profile_3} alt='' />
-        </span>
-        <span>
-          <img src={profile_4} alt='' />
-        </span>
-        <span>
-          <img src={profile_5} alt='' />
-        </span>
-        <p>
-          Liked by <b>Ernest Archiever</b> and <b>2, 323 others</b>
-        </p>
-      </div>
-      <div className='caption'>
+      {likeCount >= 5 ? (
+        <div className='liked-by'>
+          {likedBy
+            .filter((author) => author._id !== user._id)
+            .slice(0, 3)
+            .map((user) => (
+              <span>
+                <img src={user.profile} alt='' />
+              </span>
+            ))}
+          <p>
+            Liked by{' '}
+            {likedBy
+              .filter((author) => author._id !== user._id)
+              .slice(0, 3)
+              .map((user) => (
+                <b>{user.nickname} </b>
+              ))}{' '}
+            and <b>{likeCount - 3} others</b>
+          </p>
+        </div>
+      ) : (
+        <div className='liked-by'>
+          <p>
+            <b>{likeCount} </b> Likes
+          </p>
+        </div>
+      )}
+      {/* <div className='caption'>
         <p>
           Lana Rose Lorem ipsum dolor sit quisquam eius.
           <span className='hash-tag'>#lifestyle</span>
         </p>
-      </div>
+      </div> */}
       <div
         className='text-muted'
         onClick={() => {
