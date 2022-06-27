@@ -28,6 +28,20 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['USER'],
     }),
+    followUser: builder.mutation({
+      query: (followUserId) => ({
+        url: `/users/follow/${followUserId}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['USER'],
+    }),
+    unfollowUser: builder.mutation({
+      query: (followUserId) => ({
+        url: `/users/unfollow/${followUserId}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['USER'],
+    }),
   }),
 });
 
@@ -37,4 +51,6 @@ export const {
   useGetBookmarksQuery,
   useAddBookmarkMutation,
   useRemoveBookmarkMutation,
+  useFollowUserMutation,
+  useUnfollowUserMutation,
 } = userApiSlice;

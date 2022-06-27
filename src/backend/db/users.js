@@ -89,12 +89,12 @@ export const users = [
   {
     // _id: uuid(),
     _id: 6,
-    username: 'Aditi',
-    nickname: '@aditi',
-    email: 'aditi@gmail.com',
+    username: 'Abhiram',
+    nickname: '@abhiram',
+    email: 'abhiram@gmail.com',
     password: 'sohan123',
     profile:
-      'https://images.unsplash.com/photo-1654714040402-4f43178195f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+      'https://images.unsplash.com/photo-1561037404-61cd46aa615b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
     describtion: '',
     createdAt: formatDate(),
     updatedAt: formatDate(),

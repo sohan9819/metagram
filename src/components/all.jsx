@@ -18,6 +18,7 @@ import { UserPosts } from './UserPosts';
 import { PostEditForm } from './PostEditForm';
 import { PostPreview } from './PostPreview';
 import { Comment } from './Comment';
+import { CommentsList } from './CommentsList';
 
 export {
   Nav,
@@ -40,4 +41,5 @@ export {
   Preloader,
   UserPosts,
   Comment,
+  CommentsList,
 };

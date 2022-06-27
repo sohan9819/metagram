@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { useGetUsersQuery } from 'features/users/usersSlice';
 
 const initialState = {
   authStatus: JSON.parse(localStorage.getItem('AUTH_TOKEN')) ? true : false,
