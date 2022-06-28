@@ -1,11 +1,4 @@
-import profile_1 from 'assets/images/profile-2.jpg';
-import profile_2 from 'assets/images/profile-3.jpg';
-import profile_3 from 'assets/images/profile-4.jpg';
-import profile_4 from 'assets/images/profile-5.jpg';
-import profile_5 from 'assets/images/profile-6.jpg';
-import post_1 from 'assets/images/feed-1.jpg';
 import {
-  FiMoreVertical,
   FiTrash2,
   FiHeart,
   FiMessageCircle,
@@ -18,7 +11,7 @@ import { timeAgo } from 'utilities/TimeAgo';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser, updateUser } from 'features/auth/authSlice';
-import { CommentForm, Comment, PostEditForm, Preloader } from './all';
+import { CommentForm, Comment, Preloader, CommentsList } from './all';
 import {
   useDeletePostMutation,
   useLikePostMutation,
@@ -27,6 +20,7 @@ import {
 import {
   useAddBookmarkMutation,
   useRemoveBookmarkMutation,
+  useGetBookmarksQuery,
 } from 'features/users/usersSlice';
 import { useGetCommentsQuery } from 'features/posts/commentsSlice';
 
@@ -35,6 +29,7 @@ export const PostPreview = ({
   postEditState,
   setPostEditState,
   author,
+  user,
 }) => {
   const [deletePost] = useDeletePostMutation();
   const [likePost] = useLikePostMutation();
@@ -42,11 +37,8 @@ export const PostPreview = ({
   const [addBookmark] = useAddBookmarkMutation();
   const [removeBookmark] = useRemoveBookmarkMutation();
 
-  const dispatch = useDispatch();
-
   const [hideComment, setHideComment] = useState(true);
   const { user_id, body, image, createdAt, _id, likes } = post;
-  const user = useSelector(selectCurrentUser);
 
   const { likeCount, likedBy, dislikedBy } = likes;
 
@@ -71,61 +63,33 @@ export const PostPreview = ({
     }
   };
 
-  const isUserLiked =
-    likedBy.findIndex((author) => author._id === user._id) === -1
-      ? false
-      : true;
-
-  const isUserBookmarked =
-    user.bookmarks.findIndex((post) => post._id === _id) === -1 ? false : true;
-
-  const likeDislikeHandler = async () => {
-    if (isUserLiked) {
-      const { data, error, isSuccess, isLoading } = await dislikePost(_id);
-      if (error) {
-        console.log('Error ', error);
-      }
-
-      if (isSuccess) {
-        console.log('Deleted commment successfully');
-      }
-    } else {
-      const { data, error, isSuccess, isLoading } = await likePost(_id);
-      if (error) {
-        console.log('Error ', error);
-      }
-
-      if (isSuccess) {
-        console.log('Deleted commment successfully');
-      }
+  const likeHandler = async () => {
+    const { data, error, isSuccess, isLoading } = await likePost(_id);
+    if (error) {
+      console.log('Error ', error);
+    }
+  };
+  const dislikeHandler = async () => {
+    const { data, error, isSuccess, isLoading } = await dislikePost(_id);
+    if (error) {
+      console.log('Error ', error);
+    }
+  };
+  const addBookmarkHandler = async () => {
+    const { data, error, isSuccess, isLoading } = await addBookmark(_id);
+    if (error) {
+      console.log('Error ', error);
+    }
+  };
+  const removeBookmarkHandler = async () => {
+    const { data, error, isSuccess, isLoading } = await removeBookmark(_id);
+    if (error) {
+      console.log('Error ', error);
     }
   };
 
-  const bookmarkHandler = async () => {
-    if (isUserBookmarked) {
-      const { data, error, isSuccess, isLoading } = await removeBookmark(_id);
-
-      if (error) {
-        console.log('Error ', error);
-      }
-
-      if (data?.bookmarks) {
-        dispatch(updateUser({ ...user, ...data }));
-      }
-    } else {
-      const { data, error, isSuccess } = await addBookmark(_id);
-
-      if (error) {
-        console.log('Error ', error);
-      }
-
-      if (data?.bookmarks) {
-        dispatch(updateUser({ ...user, ...data }));
-      }
-    }
-  };
-
-  const { data, error, isLoading, isSuccess } = useGetCommentsQuery(_id);
+  const comments = useGetCommentsQuery(_id);
+  const { data, error, isLoading, isSuccess } = useGetBookmarksQuery();
 
   return (
     <div key={_id} className='feed'>
@@ -142,7 +106,7 @@ export const PostPreview = ({
           </div>
         </div>
         <div className='post-options'>
-          {user_id === user._id ? (
+          {user_id === user?._id ? (
             <span className='post-option edit' onClick={editHanler}>
               <FiEdit2 />
             </span>
@@ -150,7 +114,7 @@ export const PostPreview = ({
             ''
           )}
 
-          {user_id === user._id ? (
+          {user_id === user?._id ? (
             <span className='post-option delete'>
               <FiTrash2 onClick={deletehandler} />
             </span>
@@ -169,8 +133,16 @@ export const PostPreview = ({
         <div className='interaction-buttons'>
           <span>
             <FiHeart
-              onClick={likeDislikeHandler}
-              style={isUserLiked ? activeStyle : ''}
+              onClick={
+                likedBy.findIndex((author) => author._id === user?._id) === -1
+                  ? likeHandler
+                  : dislikeHandler
+              }
+              style={
+                likedBy.findIndex((author) => author._id === user?._id) === -1
+                  ? ''
+                  : activeStyle
+              }
             />
           </span>
           <span>
@@ -187,8 +159,16 @@ export const PostPreview = ({
         <div className='bookmark'>
           <span>
             <FiBookmark
-              onClick={bookmarkHandler}
-              style={isUserBookmarked ? activeStyle : ''}
+              onClick={
+                data?.bookmarks.findIndex((post) => post._id === _id) === -1
+                  ? addBookmarkHandler
+                  : removeBookmarkHandler
+              }
+              style={
+                data?.bookmarks.findIndex((post) => post._id === _id) === -1
+                  ? ''
+                  : activeStyle
+              }
             />
           </span>
         </div>
@@ -196,17 +176,17 @@ export const PostPreview = ({
       {likeCount >= 5 ? (
         <div className='liked-by'>
           {likedBy
-            .filter((author) => author._id !== user._id)
+            .filter((author) => author._id !== user?._id)
             .slice(0, 3)
             .map((user) => (
               <span>
-                <img src={user.profile} alt='' />
+                <img src={user?.profile} alt='' />
               </span>
             ))}
           <p>
             Liked by{' '}
             {likedBy
-              .filter((author) => author._id !== user._id)
+              .filter((author) => author._id !== user?._id)
               .slice(0, 3)
               .map((user) => (
                 <b>{user.nickname} </b>
@@ -221,12 +201,6 @@ export const PostPreview = ({
           </p>
         </div>
       )}
-      {/* <div className='caption'>
-        <p>
-          Lana Rose Lorem ipsum dolor sit quisquam eius.
-          <span className='hash-tag'>#lifestyle</span>
-        </p>
-      </div> */}
       <div
         className='text-muted'
         onClick={() => {
@@ -234,28 +208,14 @@ export const PostPreview = ({
         }}
       >
         {hideComment
-          ? data?.comments.length === 0
+          ? comments.data?.comments.length === 0
             ? 'Be the first to comment'
-            : `View all ${data?.comments.length} comments`
+            : `View all ${comments.data?.comments.length} comments`
           : 'Hide comments'}
       </div>
       <div className={hideComment ? 'comments hide' : 'comments'}>
         <CommentForm {...post} />
-        {isLoading && <Preloader />}
-        {error && <h2>Something went wrong</h2>}
-        {isSuccess && data?.comments.length === 0 ? (
-          <h2>No Comments available</h2>
-        ) : (
-          data?.comments
-            .slice()
-            .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-            .map((comment, index) => (
-              <>
-                <Comment {...comment} postId={_id} key={index} />
-                <hr className='comment-divider' />
-              </>
-            ))
-        )}
+        <CommentsList {...post} />
       </div>
     </div>
   );

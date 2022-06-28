@@ -9,11 +9,14 @@ import {
 } from '../components/all';
 import { selectCurrentUser } from 'features/auth/authSlice';
 import { useSelector } from 'react-redux';
+import { useGetUserQuery } from 'features/users/usersSlice';
+import { Preloader } from '../components/all';
 
 // import usrProfile from '../assets/images/profile-1.jpg';
 
 export const Profile = () => {
   const user = useSelector(selectCurrentUser);
+  const { data, error, isLoading, isSuccess } = useGetUserQuery(user._id);
   // const {
   //   describtion,
   //   email,
@@ -47,11 +50,25 @@ export const Profile = () => {
             </article>
             <div className='feeds'>
               <h2>Recent Posts</h2>
-              {/* <Post />
-              <Post />
-              <Post /> */}
               <UserPosts {...user} />
             </div>
+            {/* {isLoading && <Preloader />}
+            {error && <h2>Something went wrong</h2>}
+            {isSuccess && (
+              <>
+                <ProfileTag {...data?.user} />
+                <article className='profile-info'>
+                  <ProfileInfo user={data?.user} />
+                </article>
+                <article class='profile-card'>
+                  <ProfileForm user={data?.user} />
+                </article>
+                <div className='feeds'>
+                  <h2>Recent Posts</h2>
+                  <UserPosts {...data?.user} />
+                </div>
+              </>
+            )} */}
           </Middle>
           <Right />
         </div>

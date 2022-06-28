@@ -1,6 +1,6 @@
 import { SearchBar, FollowUser } from '../components/all';
 import { useSelector } from 'react-redux';
-import { selectAllUsers } from 'features/users/usersSlice';
+import { selectAllUsers, useGetUserQuery } from 'features/users/usersSlice';
 import { selectCurrentUser } from 'features/auth/authSlice';
 import { useGetUsersQuery } from 'features/users/usersSlice';
 import { Preloader } from '../components/all';
