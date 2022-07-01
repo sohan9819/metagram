@@ -29,6 +29,13 @@
   - User Signup
   - User Login
   - User Logout
+- Add , Update & Delete Post
+- Add , Update & Delete Comment
+- User Profile Update
+- Follow / Unfollow
+- Like Post
+- Bookmark Post
+- Feed Posts
 - Fully Responsive
 
 # Built With
