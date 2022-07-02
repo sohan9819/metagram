@@ -16,19 +16,17 @@
 
 # Features
 
-<!-- - Feed Posts
-- Explore & Trending Posts
-- Add , Update & Delete Post
-- Add , Update & Delete Comment
-- User Profile Update
-- Follow / Unfollow
-- Search User
-- Like and Comment on Post -->
-
 - Authentication:
   - User Signup
   - User Login
   - User Logout
+- Add , Update & Delete Post
+- Add , Update & Delete Comment
+- User Profile Update
+- Follow / Unfollow
+- Like Post
+- Bookmark Post
+- Feed Posts
 - Fully Responsive
 
 # Built With
